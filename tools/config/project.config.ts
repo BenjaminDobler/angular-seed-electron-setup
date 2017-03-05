@@ -1,8 +1,8 @@
-import { join } from 'path';
-import { argv } from 'yargs';
+import {join} from 'path';
+import {argv} from 'yargs';
 
 
-import { SeedConfig } from './seed.config';
+import {SeedConfig} from './seed.config';
 // import { ExtendPackages } from './seed.config.interfaces';
 
 /**
@@ -12,11 +12,13 @@ import { SeedConfig } from './seed.config';
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
-  BUILD_TARGET:string = getBuildTarget();
+  BUILD_TARGET: string = getBuildTarget();
 
   constructor() {
     super();
 
+
+    // Electron/Node config
     if (this.BUILD_TARGET === 'electron') {
       this.SYSTEM_CONFIG_DEV.map = {
         electron: '@node/electron'
@@ -75,12 +77,12 @@ export class ProjectConfig extends SeedConfig {
 
 
 /**
- * Returns the application build type.
+ * Returns the application target type.
  */
-function getBuildTarget():string {
-  let type = (argv['build-target']);
-  if (!type) {
-    type = 'browser';
+function getBuildTarget(): string {
+  let target = (argv['build-target']);
+  if (!target) {
+    target = 'browser';
   }
-  return type;
+  return target;
 }
