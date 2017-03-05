@@ -1,0 +1,23 @@
+{
+  "test": [
+    "tslint",
+    "build.test",
+    "karma.run"
+  ],
+
+  "serve.dev.electron": [
+    "serve.dev",
+    "electron.dev"
+  ],
+
+  "build.electron": [
+    "build.prod.rollup.aot",
+    "electron.clean",
+    "electron.copy",
+    "electron.electron.copy",
+    "electron.replace",
+    "electron.install.deps",
+    "electron.package"
+  ]
+}
+
