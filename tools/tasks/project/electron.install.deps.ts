@@ -1,9 +1,8 @@
 /**
  * Created by benjamindobler on 04.03.17.
  */
-import * as gulp from 'gulp';
 var exec: any = require('child_process').exec;
-import { join } from 'path';
+import {join} from 'path';
 
 import Config from '../../config';
 

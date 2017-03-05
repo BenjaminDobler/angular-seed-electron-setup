@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NameListService } from '../shared/name-list/name-list.service';
 import {remote} from 'electron';
 import System = SystemJSLoader.System;
+//const remote = require('electron').remote;
 /**
  * This class represents the lazy loaded HomeComponent.
  */
@@ -27,11 +28,10 @@ export class HomeComponent implements OnInit {
     let w:any = window;
 
 
-    console.log("Node require ", w.nodeRequire);
-    console.log("None Node ", w.require);
-    console.log("System", System._nodeRequire);
-    let udp:any = w.nodeRequire('udp-service-discovery');
-    console.log("udp", udp);
+    if (w.nodeRequire) {
+      let udp: any = w.nodeRequire('udp-service-discovery');
+      console.log("udp", udp);
+    }
   }
 
   /**

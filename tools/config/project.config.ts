@@ -1,4 +1,6 @@
 import { join } from 'path';
+import { argv } from 'yargs';
+
 
 import { SeedConfig } from './seed.config';
 // import { ExtendPackages } from './seed.config.interfaces';
@@ -10,9 +12,28 @@ import { SeedConfig } from './seed.config';
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
+  BUILD_TARGET:string = getBuildTarget();
 
   constructor() {
     super();
+
+    if (this.BUILD_TARGET === 'electron') {
+      this.SYSTEM_CONFIG_DEV.map = {
+        electron: '@node/electron'
+      };
+      this.SYSTEM_BUILDER_CONFIG.map = {
+        electron: '@node/empty'
+      };
+    } else {
+      this.SYSTEM_CONFIG_DEV.map = {
+        electron: '@empty'
+      };
+      this.SYSTEM_BUILDER_CONFIG.map = {
+        electron: '@empty'
+      };
+    }
+
+
     // this.APP_TITLE = 'Put name of your app here';
     // this.GOOGLE_ANALYTICS_ID = 'Your site's ID';
 
@@ -50,4 +71,16 @@ export class ProjectConfig extends SeedConfig {
     // this.PLUGIN_CONFIGS['browser-sync'] = { ghostMode: false };
   }
 
+}
+
+
+/**
+ * Returns the application build type.
+ */
+function getBuildTarget():string {
+  let type = (argv['build-target']);
+  if (!type) {
+    type = 'browser';
+  }
+  return type;
 }

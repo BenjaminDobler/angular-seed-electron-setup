@@ -13,11 +13,22 @@
   <!-- endinject -->
 
   <script>
-    window.nodeRequire = require;
-    window.electron = require('electron');
-    // Because we serve in dev mode over http instead of file we need to tell electron where our node_modules are!
-    window.nodeRequire('module').globalPaths.push("<%= PROJECT_ROOT %>/electron/src/node_modules");
+    if (window.require) {
+      window.nodeRequire = require;
+      window.electron = require('electron');
+    } else {
+        window.electron = {}; // We need this otherwise aot complains in the browser
+    }
+
   </script>
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script>
+    // Because we serve in dev mode over http instead of file we need to tell electron where our node_modules are!
+    if (window.nodeRequire) {
+      window.nodeRequire('module').globalPaths.push("<%= PROJECT_ROOT %>/electron/src/node_modules");
+    }
+  </script>
+  <% } %>
 
 
 </head>

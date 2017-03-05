@@ -399,9 +399,6 @@ export class SeedConfig {
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     },
-    map: {
-      electron: '@node/electron'
-    },
     packages: {
 
     }
@@ -475,10 +472,7 @@ export class SeedConfig {
         main: 'Rx.js',
         defaultExtension: 'js'
       }
-    },
-    map: {
-      electron: '@node/electron'
-    },
+    }
   };
 
   /**
@@ -700,3 +694,6 @@ function getBuildType() {
     return BUILD_TYPES.DEVELOPMENT;
   }
 }
+
+
+
